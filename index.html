@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Uganda Tourism & Cultural Heritage Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body> 
+    <header>
+        <div class="container">
+            <h1>Central Uganda Tourism & Cultural Heritage Map</h1>
+            <p>Explore the rich cultural, historical, and natural attractions of Central Uganda</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Left Panel - Controls -->
+        <div class="left-panel">
+            <!-- All Controls Together -->
+            <div class="controls-panel">
+                <!-- Location Section -->
+                <div class="control-section location-section">
+                    <h3>Location Services</h3>
+                    <button id="locateMe" class="btn-locate">
+                        📍 Locate Me
+                    </button>
+                    <div class="location-status" id="locationStatus">
+                        Click to find your location
+                    </div>
+                </div>
+
+                <!-- Filter Section -->
+                <div class="control-section filter-section">
+                    <h3>Filter Sites</h3>
+                    <div class="filter-options">
+                        <label class="filter-group">
+                            <input type="checkbox" id="historical" checked>
+                            <span class="checkmark historical"></span>
+                            Historical Sites
+                        </label>
+                        <label class="filter-group">
+                            <input type="checkbox" id="cultural" checked>
+                            <span class="checkmark cultural"></span>
+                            Cultural Sites
+                        </label>
+                        <label class="filter-group">
+                            <input type="checkbox" id="natural" checked>
+                            <span class="checkmark natural"></span>
+                            Natural Sites
+                        </label>
+                    </div>
+                </div>
+    
+                <!-- Legend Section -->
+                <div class="control-section legend-section">
+                    <h3>Map Key</h3>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <span class="legend-color historical"></span>
+                            <span>Historical Sites</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color cultural"></span>
+                            <span>Cultural Sites</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color natural"></span>
+                            <span>Natural Sites</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Route Section -->
+                <div class="control-section route-section">
+                    <h3>Route Planning</h3>
+                    <div class="route-controls">
+                        <select id="startPoint">
+                            <option value="">Select starting point</option>
+                        </select>
+                        <select id="endPoint">
+                            <option value="">Select destination</option>
+                        </select>
+                        <div class="route-buttons">
+                            <button id="calculateRoute" class="btn-primary">
+                                🗺️ Calculate Route
+                            </button>
+                            <button id="clearRoute" class="btn-secondary">
+                                🗑️ Clear Route
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Map Container - Center -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+
+        <!-- Right Panel - Tourist Sites -->
+        <div class="right-panel">
+            <!-- Tourist Sites -->
+            <div class="sites-panel">
+                <h3>Tourist Sites <span class="site-count">(15)</span></h3>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search sites...">
+                    <button id="search-btn">🔍</button>
+                </div>
+                <div id="sitesContainer" class="sites-list"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Uganda Tourism</h4>
+                    <p>Discover the Pearl of Africa - rich in culture, history, and natural beauty. Explore our interactive map to plan your perfect Ugandan adventure.</p>
+                    <div class="contact-info">
+                        <p>📍 Kampala, Uganda</p>
+                        <p>📞 +256 743 366 619</p>
+                        <p>✉️ info@ugandatourism.go.ug</p>
+                        <p>🕒 Mon - Fri: 8:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Uganda</a></li>
+                        <li><a href="#">Travel Information</a></li>
+                        <li><a href="#">Accommodation</a></li>
+                        <li><a href="#">Events & Festivals</a></li>
+                        <li><a href="#">Travel Guides</a></li>
+                        <li><a href="#">Photo Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Uganda Tourism Board</a></li>
+                        <li><a href="#">Cultural Heritage Sites</a></li>
+                        <li><a href="#">Wildlife & Safaris</a></li>
+                        <li><a href="#">Adventure Tourism</a></li>
+                        <li><a href="#">Travel Tips</a></li>
+                        <li><a href="#">Emergency Contacts</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://facebook.com/Amela Culture" class="social-link facebook" aria-label="Follow us on Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://twitter.com/@Amelagraphics" class="social-link twitter" aria-label="Follow us on Twitter">
+                            <span>Twitter</span>
+                        </a>
+                        <a href="https://instagram.com/Amela Culture" target="_blank" class="social-link instagram">
+                            <span></span>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://youtube.com/@amelagraphics" target="_blank" class="social-link youtube">
+                            <span>YouTube</span>
+                        </a>
+                        <a href="https://tiktok.com/@amelagraphics" target="_blank" class="social-link tiktok">
+                            <span></span>
+                            <span>TikTok</span>
+                        </a>
+                        <a href="https://wa.me/+256 743-366-619" target="_blank" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                    
+                    <div class="newsletter">
+                        <h5>Stay Updated</h5>
+                        <p>Subscribe to our newsletter for the latest travel updates and offers.</p>
+                        <div class="newsletter-form">
+                            <form class="newsletter-form" id="newsletterForm">
+                                <input type="email" placeholder="Your email address" class="newsletter-input" id="emailInput" required>
+                            <button class="newsletter-btn">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>
+                    <span class="uganda-flag">🇺🇬</span>
+                    &copy; 2025 Uganda Tourism Board. All rights reserved. | Pearl of Africa
+                    <span class="uganda-flag">🇺🇬</span>
+                </p>
+                <p>Designed with ❤️ for Uganda Tourism</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

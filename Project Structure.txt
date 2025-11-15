@@ -1,0 +1,14 @@
+uganda-tourism-map/
+│
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── app.js
+│   ├── data.js
+│   └── routing.js
+├── images/
+│   └── (site photos)
+└── report.pdf
+
+https://amela16rogers.github.io/Central-Uganda-Tourism-Cultural-Heritage-Map/
